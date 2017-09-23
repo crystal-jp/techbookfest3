@@ -61,44 +61,13 @@ $ curl -X GET http://localhost:8080
 Hello world!
 ```
 
-HTTP::Handlerを使って見ましょう。
-HTTP::Handlerを自分のクラスにincludeして、callメソッドを実装します。
+HTTP::Handlerを使って見ましょう。下にあるのがHTTP::Handlerの実装です。
+Handler（Middleware）はサーバとアプリケーションの外部の間、つまりサーバの前にあり、サーバにリクエストが入る直前とサーバからレスポンスが出てきた直後のタイミングで様々な処理をすることができます。
+また、HTTP::Handlerは複数積み重ねることができます。HTTP::Handlerは次のHTTP::Handlerをnextプロパティとして持っていて、call_nextメソッドを呼び出すことで次のHTTP::Handlerのcallを呼び出します。
 
 ```rb
-require "http/server"
+# crystal/src/http/server/handler.cr
 
-class TimeLogger
-  include HTTP::Handler
-
-  def call(context)
-    start = Time.now
-    response = call_next(context) # sends request to next handlers
-    finish = Time.now
-    puts "%.4f ms" % ((finish - start).to_f * 1000)
-    response
-  end
-end
-
-server = HTTP::Server.new("0.0.0.0", 8080, [TimeLogger.new]) do |context|
-  context.response.content_type = "text/plain"
-  context.response.print "Hello world!"
-end
-
-puts "Listening on http://0.0.0.0:8080"
-server.listen
-```
-
-先ほどと同じようにアクセスすると、レスポンスが返るまでの時間が出力されます。
-
-```
-$ crystal server.cr
-Listening on http://0.0.0.0:8080
-0.1770 ms
-```
-
-HTTP::Handlerは鎖状になっています。HTTP::Handlerは次のHTTP::Handlerを持っていて、callの中でcall_nextを呼び出すことで次のHTTP::Hhandlerのcallを呼び出します。
-
-```rb
 module HTTP::Handler
   property next : Handler | Proc | Nil
 
@@ -118,7 +87,42 @@ module HTTP::Handler
 end
 ```
 
-先ほどサーバを作った際に呼び出したコンストラクタをみてみましょう。build_middlewareの中で渡されたHTTP::Handlerの配列のnextプロパティに配列の次のHTTP::Handlerがセットされ、渡したブロックが配列の末尾に追加されます。
+HTTP::Handlerを使うには、自分のクラスにincludeして、callメソッドを実装します。作ったHandlerはHTTP::Serverのコンストラクタに渡すことができます。
+
+```rb
+require "http/server"
+
+class TimeLogger
+  include HTTP::Handler
+
+  def call(context)
+    start = Time.now
+    response = call_next(context) # sends request to next handlers
+    finish = Time.now
+    puts "%.4f ms" % ((finish - start).to_f * 1000)
+    response
+  end
+end
+
+# Handlerをセットできる
+server = HTTP::Server.new("0.0.0.0", 8080, [TimeLogger.new]) do |context|
+  context.response.content_type = "text/plain"
+  context.response.print "Hello world!"
+end
+
+puts "Listening on http://0.0.0.0:8080"
+server.listen
+```
+
+先ほどと同じようにアクセスすると、レスポンスが返るまでの時間が出力されます。
+
+```
+$ crystal server.cr
+Listening on http://0.0.0.0:8080
+0.1770 ms
+```
+
+HTTP::Serverのコンストラクタをみてみましょう。build_middlewareの中で渡されたHTTP::Handlerの配列のnextプロパティに配列の次のHTTP::Handlerがセットされ、渡したブロックが配列の末尾に追加されます。
 
 ```rb
 class HTTP::Server
@@ -157,6 +161,8 @@ icr(0.23.1) > puts result.payload
 featured
 ```
 
+このluislavena/radixというライブラリに限って言えば、パスを表すStringをKeyに、HandlerのスタックをValueにもつ連想配列とみることができます。Valueは選ぶことができますが、kemalとamberではHandlerに相当する部分（フレームワーク内ではRouterと呼ばれている）のStackの先頭のHandlerを、RazeではHandlerのStackそのものをValueに持っています。
+
 ## フレームワーク実装
 今回作るフレームワークはRazeを参考にしたもので、次のような設計です。
 
@@ -171,7 +177,7 @@ featured
 
 ### Handler
 
-HTTP::Handlerとは少し違いますが、callメソッドを実装します。Contextと次のFw::Handlerのcallメソッドを呼び出す為のProcであるdoneを受け取るように実装しています。
+HTTP::Handlerとは少し違いますが、callメソッドのシグネチャを定義します。Contextと次のFw::Handlerのcallメソッドを呼び出す為のProcであるdoneを受け取るように実装しています。
 
 ```rb
 require "http/server"
