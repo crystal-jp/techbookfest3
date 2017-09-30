@@ -4,17 +4,14 @@ Twitter: @msky026
 
 # はじめに
 
-1年前の技術書典1で記述しました、「CrystalとWeb」からの変更点を主に纏めます。  
-内容は以下のとおりです。  
-
-- Kemalの変更点
-- Sidekiq.crと組み合わせて非同期処理を実現する
+1年前の技術書典1で「CrystalとWeb」について記述しました。  
+CrystalやKemalもそれから多くの点で変更になりましたが、本稿では主にDBの扱い方について解説します。
 
 # Kemalの変更点
 
 ## DB接続設定の変更
 
-まず主だった変更点として、DB接続を行うモジュールが変更になっています。  
+まず主だった変更点として、DB接続を行うモジュールが変更されましｔ。  
 以前はPostgreSQLを使用する際はkemal-pgを使ってDBに接続していましたが、DB接続関連は[crystal-db](https://github.com/crystal-lang/crystal-db)のライブラリがデファクトスタンダードになっています。こちらのライブラリは現時点でコネクションプールも備えております。  
 以前はコネクションプール使用時には専用のライブラリを使用していましたがそれも不要になりました。  
 
@@ -33,7 +30,7 @@ dependencies:
     branch: master
 
 dependencies:
-  crystal-db:
+  db:
     github: crystal-lang/crystal-db
     branch: master
 ```
@@ -195,14 +192,4 @@ db.exec("update articles set title = $1::text, body = $2::text where id = $3::in
 </tbody>
 </table>
 ```
-
-## Sidekiq.crと組み合わせて非同期処理を実現する
-
-Crystalで非同期処理を行いたい場合は、Sidekiqを使用することである程度可能になります。
-Rubyでよく使用されるSidekiqのCrystal版があります。
-
-[Sidekiq.cr](https://github.com/mperham/sidekiq.cr)
-
-
-
 
