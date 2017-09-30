@@ -24,7 +24,7 @@ Twitter: @msky026
 `shard.yml`ファイルを以下の内容に修正します。  
 
 ```
-name: msky-kemal-sample
+name: kemal-sample
 version: 0.2.0
 
 dependencies:
@@ -197,4 +197,12 @@ db.exec("update articles set title = $1::text, body = $2::text where id = $3::in
 ```
 
 ## Sidekiq.crと組み合わせて非同期処理を実現する
+
+Crystalで非同期処理を行いたい場合は、Sidekiqを使用することである程度可能になります。
+Rubyでよく使用されるSidekiqのCrystal版があります。
+
+[Sidekiq.cr](https://github.com/mperham/sidekiq.cr)
+
+
+
 
