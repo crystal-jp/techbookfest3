@@ -211,7 +211,8 @@ dependencies:
 
 本サンプルでは、簡単な認証機能を追加してみます。新規投稿を行う場合は認証済みのユーザでなければ出来ない（新規投稿画面に遷移できない）ようにします。
 
-ソースを以下の内容で修正します。
+ソースを以下の内容で修正します。  
+kemal-sample.crは以下の通りです。
 
 `src/kemal-sample.cr`
 ```crystal
@@ -249,6 +250,25 @@ get "/logout" do |env|
   env.redirect "/"
 end
 ```
+
+ログイン画面を新規で追加します。
+
+`src/views/login.ecr`
+```
+<h2>ログイン</h2>
+<form method="post", action="/login">
+  <input type="text" name="user_id" size="10" maxlength="10" />
+  <br />
+  <br />
+  <input type="password" name="password" size="10" maxlength="10" />
+  <br />
+  <br />
+  <input type="submit" value="post">
+</form>
+
+```
+
+ヘッダの内容を変更します。
 
 `src/views/application.ecr`
 ```
@@ -302,6 +322,7 @@ end
 
 画面の方を以下の内容に修正します。
 
+`src/views/application.ecr`より抜粋。
 ```
   <li><a href="/articles">ArticleList</a></li>
   <% if env.session.string?("username") %>
