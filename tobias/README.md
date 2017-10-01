@@ -1,7 +1,7 @@
 # CryatalのWeb Framework
 
 ## はじめに
-Crystalにも多くのフレームワークがあります。
+Crystalにも多くのWebフレームワークがあります。
 
 * amber  
   同じCrystalのフレームワークであるKemalやRails、ElixirのPhoenixなど多くのフレームワークから良いところを取り入れつつ、Crystalらしさを重視しているフレームワークです。
@@ -161,7 +161,7 @@ icr(0.23.1) > puts result.payload
 featured
 ```
 
-このluislavena/radixというライブラリに限って言えば、パスを表すStringをKeyに、HandlerのスタックをValueにもつ連想配列とみることができます。Valueは選ぶことができますが、kemalとamberではHandlerに相当する部分（フレームワーク内ではRouterと呼ばれている）のStackの先頭のHandlerを、RazeではHandlerのStackそのものをValueに持っています。
+このluislavena/radixというライブラリに限って言えば、パスを表すStringをKeyに、HandlerのスタックをValueにもつ連想配列とみることができます。Valueの型は変えることができますが、kemalとamberではHandlerに相当する部分（フレームワーク内ではRouterと呼ばれている）のStackの先頭のHandlerを、RazeではHandlerのStackそのものをValueに持っています。
 
 ## フレームワーク実装
 今回作るフレームワークはRazeを参考にしたもので、次のような設計です。
@@ -177,7 +177,7 @@ featured
 
 ### Handler
 
-HTTP::Handlerとは少し違いますが、callメソッドのシグネチャを定義します。Contextと次のFw::Handlerのcallメソッドを呼び出す為のProcであるdoneを受け取るように実装しています。
+callメソッドのシグネチャを定義します。HTTP::Handlerとは少し違いますが、RazeではContextと次のFw::Handlerのcallメソッドを呼び出す為のProcであるdoneを受け取るように実装しています。
 
 ```rb
 require "http/server"
@@ -201,7 +201,7 @@ module Fw
 end
 ```
 
-Fw::Handlerを積むためのStackです。
+Fw::Handlerを積むためのStackです。このStackはmiddlewaresと言う名前のHandlerを格納する為の配列を持っていて、クラスの外からrunメソッドを呼ぶことでこの配列の先頭のHandlerから順にcallメソッドを呼び出すことができます。
 
 ```rb
 require "./*"
@@ -215,7 +215,7 @@ module Fw
       self.next(0, ctx)
     end
 
-    def next(index : Int32, ctx : HTTP::Server::Context)
+    private def next(index : Int32, ctx : HTTP::Server::Context)
       if mw = @middlewares[index]?
         mw.call ctx, ->{ self.next(index + 1, ctx) }
       elsif block = @block
@@ -230,6 +230,8 @@ end
 
 ### ServerHandler
 
+ServerHandlerはHTTP::Serverとルーティング用のRadixとミドルウェアのStackを結びつけるクラスで、Radixを持ち、Radixのaddをラップするメソッドadd_stackを定義しています。また、ServerHandlerはHTTP::Serverのインスタンス化時に引数として渡したいので、HTTP::Handlerをincludeしています。
+
 ```rb
 require "http"
 require "./*"
@@ -241,7 +243,7 @@ module Fw
 
     INSTANCE = new
 
-    private def initialize
+    def initialize
       @tree = Radix::Tree(Fw::Stack).new
     end
 
@@ -269,6 +271,9 @@ end
 ```
 
 ### Fw
+
+Fwはこのフレームワークのエンドポイントになります。下のコードを見ての通りですが、hostとportを受け取ってHTTP::Serverをインスタンス化します。この時にHTTP::Handlerをincludeしたクラスを渡すことができます。
+
 ```rb
 require "./fw/*"
 
@@ -281,6 +286,12 @@ end
 ```
 
 ### DSL
+
+最後にDSLを作ります。各メソッドの中ですることは
+1. 引数で受け取ったFw::Handlerの配列をFw::Stackにする
+2. Fw::ServerHandlerのadd_stackメソッドで、パスとStackを紐づけて登録する
+の2つになります。
+
 ```rb
 require "./*"
 
@@ -298,3 +309,9 @@ HTTP_METHODS_OPTIONS = %w(get post put patch delete options)
   end
 {% end %}
 ```
+
+## 使い方
+
+
+
+## まとめ
