@@ -1,7 +1,9 @@
-# CryatalのWeb Framework
+Title: CrystalのWeb Framework
+Author: tobias
+Twitter: @TobiasGSmollett
 
 ## はじめに
-Crystalにも多くのWebフレームワークがあります。
+初めまして、@TobiasGSmollettと申します。Crystalにも多くのWebフレームワークがあり、その中でもkemalやrazeのようなシンプルさを意識したフレームワークを参考に、フレームワークを作ってみようと思います。まず、Crystalのフレームワークをいくつか紹介しておきます。
 
 * amber  
   同じCrystalのフレームワークであるKemalやRails、ElixirのPhoenixなど多くのフレームワークから良いところを取り入れつつ、Crystalらしさを重視しているフレームワークです。
@@ -290,7 +292,8 @@ end
 最後にDSLを作ります。各メソッドの中ですることは
 1. 引数で受け取ったFw::Handlerの配列をFw::Stackにする
 2. Fw::ServerHandlerのadd_stackメソッドで、パスとStackを紐づけて登録する
-の2つになります。
+の2つになります。RazeのDSL部分を見るともっと多くのマクロが書かれていますが、各マクロが生成するメソッドのシグネチャが異なるだけで、やっていることはこの2つになります。
+
 
 ```rb
 require "./*"
@@ -323,5 +326,5 @@ end
 Fw.run
 ```
 
-
 ## まとめ
+ということで、簡単ではありますがRazeを参考にフレームワークを作りました。今回作ったフレームワークのソースコードは[https://github.com/TobiasGSmollett/fw](https://github.com/TobiasGSmollett/fw)に置いてあります。また、今回は大まかな流れを理解するのが目的だったので細かいエラーの処理などは省いています。開発がはじまってからまだ時間が経っていないWebフレームワークが多く、開発にも参加しやすいと思います。CrystalのWebフレームワークの中では、現在はkemalが最も人気ですがRazeやamberのような有望なフレームワークも多くあり、今後も注目していきたいと思います。
