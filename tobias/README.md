@@ -18,7 +18,7 @@ Twitter: @TobiasGSmollett
   2017年になってから開発がスタートしたフレームワークで、まだ初期段階にあるフレームワークです。CLIやORMなどのプロジェクトもあり、issueにTODOが溜められていて今後に期待のフレームワークです。
 
 * raze  
-  Middlewareと呼ばれる部分を中心にしたフレームワークで、スポンサーのQualtrics社がproductionで使用しているようです。また、@thrandさんのベンチマーク（ https://github.com/tbrand/which_is_the_fastest ）でも高いパフォーマンスが出ています。
+  Middlewareと呼ばれる部分を中心にしたフレームワークで、スポンサーのQualtrics社がproductionで使用しているようです。また、@tbrandさんのベンチマーク（ https://github.com/tbrand/which_is_the_fastest ）でも高いパフォーマンスが出ています。
 
 また、関連するライブラリをいくつか紹介しておきます。
 
