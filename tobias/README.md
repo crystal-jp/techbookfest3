@@ -166,7 +166,7 @@ featured
 ## フレームワーク実装
 今回作るフレームワークはRazeを参考にしたもので、次のような設計です。
 
-**図と説明が入る**
+![img](https://github.com/TobiasGSmollett/techbookfest3/blob/tobias/img.001.png)
 
 次の順番で実装していきます。
 1. Handler
@@ -311,7 +311,17 @@ HTTP_METHODS_OPTIONS = %w(get post put patch delete options)
 ```
 
 ## 使い方
+実際に作ったフレームワークを使って見ましょう。RazeやKemalと同じように書けます。
 
+```rb
+require "./fw"
+
+get "/hello" do |ctx|
+  "hello, world!"
+end
+
+Fw.run
+```
 
 
 ## まとめ
