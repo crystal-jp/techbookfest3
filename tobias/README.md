@@ -166,7 +166,7 @@ featured
 ## フレームワーク実装
 今回作るフレームワークはRazeを参考にしたもので、次のような設計です。
 
-![img](https://github.com/TobiasGSmollett/techbookfest3/blob/tobias/img.001.png)
+![img](https://github.com/TobiasGSmollett/techbookfest3/blob/tobias/tobias/img.001.png)
 
 次の順番で実装していきます。
 1. Handler
