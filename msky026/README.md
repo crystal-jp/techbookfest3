@@ -1,13 +1,15 @@
-Title: CrystalとWeb 2
-Author: msky
-Twitter: @msky026
+# CrystalとWeb 2 (著者：msky[^msky-profile])
 
-# はじめに
+[^msky-profile]: Twitter: @msky026
 
-1年前の技術書典1で「CrystalとWeb」について記述しました。  
+## はじめに
+
+1年前の技術書典1で「CrystalとWeb」について記述しました。
+
 そこでKemalを用いて簡単なCRUD機能を持つミニブログを作成しました。
-作成物については[kemal-sample](https://github.com/msky026/kemal-sample)を参照してみてください。  
-それからCrystalやKemalも多くの点で変更になりました。  
+作成物については[kemal-sample](https://github.com/msky026/kemal-sample)を参照してみてください。
+
+それからCrystalやKemalも多くの点で変更になりました。
 本稿では前回作成した箇所からの変更点のうち以下の内容について解説します。
 
 - DBの扱い方について

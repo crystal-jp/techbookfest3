@@ -1,6 +1,6 @@
-Title: CrystalのWeb Framework
-Author: tobias
-Twitter: @TobiasGSmollett
+# CrystalのWeb Framework (著者: tobias[^tobias-profile])
+
+[^tobias-profile]: Twitter: @TobiasGSmollett
 
 ## はじめに
 初めまして、@TobiasGSmollettと申します。Crystalにも多くのWebフレームワークがあり、その中でもkemalやrazeのようなシンプルさを意識したフレームワークを参考に、フレームワークを作ってみようと思います。まず、Crystalのフレームワークをいくつか紹介しておきます。
@@ -64,7 +64,7 @@ Hello world!
 ```
 
 HTTP::Handlerを使って見ましょう。下にあるのがHTTP::Handlerの実装です。
-Handler（Middleware）はサーバとアプリケーションの外部の間、つまりサーバの前にあり、サーバにリクエストが入る直前とサーバからレスポンスが出てきた直後のタイミングで様々な処理をすることができます。
+Handler（Middleware）はサーバとアプリケーションの外部の間、つまりサーバの前にあり、サーバにリクエストが入る直前とサーバからレスポンスが出てきた直後のタイミングで様々な処理をすることができます。
 また、HTTP::Handlerは複数積み重ねることができます。HTTP::Handlerは次のHTTP::Handlerをnextプロパティとして持っていて、call_nextメソッドを呼び出すことで次のHTTP::Handlerのcallを呼び出します。
 
 ```rb
@@ -168,7 +168,7 @@ featured
 ## フレームワーク実装
 今回作るフレームワークはRazeを参考にしたもので、次のような設計です。
 
-![img](https://github.com/TobiasGSmollett/techbookfest3/blob/tobias/tobias/img.001.png)
+![img](tobias/img.001.png)
 
 次の順番で実装していきます。
 1. Handler
