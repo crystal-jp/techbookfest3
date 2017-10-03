@@ -16,9 +16,9 @@ PANDOC_OPT  =                  \
 MD =                    \
 	MakeNowJust/README.md \
 	at-grandpa/README.md  \
+	tobias/README.md      \
 	msky026/README.md     \
 	pacuum/README.md      \
-	tobias/README.md      \
 	arcage/README.md      \
 	5t111111/README.md    \
 	postscript.md         \
