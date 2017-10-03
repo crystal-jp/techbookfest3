@@ -2,9 +2,9 @@
 
 [^5t111111-profile]: Twitter: @5t111111
 
-この章では Crystal の並行処理の概要について書きますが、内容はほぼ、公式ドキュメントの「Concurrency[^Concurrency URL]」を日本語に翻訳したものとなります。
+この章では Crystal の並行処理の概要について書きますが、内容はほぼ、公式ドキュメントの「Concurrency[^Concurrency-URL]」を日本語に翻訳したものとなります。
 
-[^Concurrency URL]: <https://crystal-lang.org/docs/guides/concurrency.html>
+[^Concurrency-URL]: <https://crystal-lang.org/docs/guides/concurrency.html>
 
 ## 並行 (Concurrency) vs 並列 (Parallelism)
 
@@ -14,9 +14,9 @@
 
 現時点では、Crystal がサポートするのは並行処理だけです。並列処理はサポートしていません。つまり、複数のタスクを一度に実行することは可能ですが、それらのコードが厳密に同時に実行されることはありません。
 
-Crystal のプログラムは OS の単一スレッド上で実行されます。ただし、ガベージコレクタ (GC) だけは例外で、並行処理によって実行されるマーク・アンド・スイープ方式で実装されています。現在、Crystal の GC の実装には Boehm GC[^Boehm GC URL] を採用しています。
+Crystal のプログラムは NS の単一スレッド上で実行されます。ただし、ガベージコレクタ (GC) だけは例外で、並行処理によって実行されるマーク・アンド・スイープ方式で実装されています。現在、Crystal の GC の実装には Boehm GC[^Boehm-GC-URL] を採用しています。
 
-[^Boehm GC URL]: <http://www.hboehm.info/gc/>
+[^Boehm-GC-URL]: <http://www.hboehm.info/gc/>
 
 ### Fiber
 
@@ -28,9 +28,9 @@ I/O に関連するものはすべてイベントループを持っているの�
 
 ### Channel
 
-Crystal には CSP[^CSP URL] に影響を受けた channel というものがあります。これによって、共有メモリを利用することなく、また、ロックやセマフォ、その他特殊な機構を気にすることなく fiber 間でデータのやり取りをすることが可能になっています。
+Crystal には CSP[^CSP-URL] に影響を受けた channel というものがあります。これによって、共有メモリを利用することなく、また、ロックやセマフォ、その他特殊な機構を気にすることなく fiber 間でデータのやり取りをすることが可能になっています。
 
-[^CSP URL]: <https://en.wikipedia.org/wiki/Communicating_sequential_processes>
+[^CSP-URL]: <https://en.wikipedia.org/wiki/Communicating_sequential_processes>
 
 ## プログラムの実行
 
@@ -182,9 +182,9 @@ end
 Fiber.yield
 ```
 
-これで期待通りの動作になります。なぜなら、上記では Proc[^Proc URL] を生成して `i` を渡して実行することにより、fiber は値のコピーを受け取るようになるためです。
+これで期待通りの動作になります。なぜなら、上記では Proc[^Proc-URL] を生成して `i` を渡して実行することにより、fiber は値のコピーを受け取るようになるためです。
 
-[^Proc URL]: <http://crystal-lang.org/api/Proc.html>
+[^Proc-URL]: <http://crystal-lang.org/api/Proc.html>
 
 ただ、これを毎回書くのは大変なので、標準ライブラリには `spawn` マクロが用意されており、メソッド呼び出しの式を受け取って上記のような書き換えを行うことができます。それを使うと以下のように書けます。
 
