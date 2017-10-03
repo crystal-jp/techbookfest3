@@ -47,17 +47,17 @@
 
 言わずと知れたエディタです。最近は私の周りでもIDE勢が多くなってきたものの、Vimを使っている方もまだまだ多くいらっしゃいます。VimのCrystalサポートは [rhysd/vim-crystal](https://github.com/rhysd/vim-crystal)が使いやすかったです。このプラグインを基本とし、デバッグやスニペットなどに必要なプラグインを追加すれば、ほぼ完璧なCrystal環境を構築することができます。さすがvimですね。（プラグイン紹介は一例です。最近だといろいろvim周りも変わってきていて古い情報かもしれません。ご容赦ください。）
 
-|項目|対応|備考|プラグイン|
-|---|:---:|---|---|
-|シンタックスハイライト|◯||[rhysd/vim-crystal](https://github.com/rhysd/vim-crystal)|
-|自動インデント|◯|改行時にインデント|[rhysd/vim-crystal](https://github.com/rhysd/vim-crystal)|
-|スニペット|△|neosnippetなどで独自実装が必要|[Shougo/neosnippet.vim](https://github.com/Shougo/neosnippet.vim) など|
-|自動フォーマット|◯|保存時にformatterをかけられる|[rhysd/vim-crystal](https://github.com/rhysd/vim-crystal)|
-|エラー検知|◯||[vim-syntastic/syntastic](https://github.com/vim-syntastic/syntastic)|
-|定義ジャンプ|◯||[rhysd/vim-crystal](https://github.com/rhysd/vim-crystal)|
-|Spec実行|◯||[rhysd/vim-crystal](https://github.com/rhysd/vim-crystal)|
-|Macro expand|△|vimscriptの記述が必要||
-|デバッグ|△|vimgdbというものがあるが情報が古め||
+|項目|対応|備考|
+|---|:---:|---|
+|シンタックスハイライト|◯|[vim-crystal](https://github.com/rhysd/vim-crystal)|
+|自動インデント|◯|[vim-crystal](https://github.com/rhysd/vim-crystal)|
+|スニペット|△|独自定義が必要（[neosnippet.vim](https://github.com/Shougo/neosnippet.vim) など）|
+|自動フォーマット|◯|保存時フォーマット（[vim-crystal](https://github.com/rhysd/vim-crystal)）|
+|エラー検知|◯|[syntastic](https://github.com/vim-syntastic/syntastic)|
+|定義ジャンプ|◯|[vim-crystal](https://github.com/rhysd/vim-crystal)|
+|Spec実行|◯|[vim-crystal](https://github.com/rhysd/vim-crystal)|
+|Macro expand|△|vimscriptの記述が必要|
+|デバッグ|△|vimgdbというものがあるが情報が古め|
 
 以下、いくつかピックアップして説明します。
 
@@ -91,14 +91,14 @@ nnoremap ce :ProjectRootExe CrystalExpand<Return>
 
 こちらも言わずと知れたエディタですね。Vimと双璧をなすエディタとして知られています。公式でも紹介されているのは、[dotmilk/emacs-crystal-mode](https://github.com/dotmilk/emacs-crystal-mode)です。
 
-|項目|対応|備考|プラグイン|
-|---|:---:|---|---|
-|シンタックスハイライト|◯||[dotmilk/emacs-crystal-mode](https://github.com/dotmilk/emacs-crystal-mode)|
-|自動インデント|◯|改行時にインデント|[dotmilk/emacs-crystal-mode](https://github.com/dotmilk/emacs-crystal-mode)|
-|スニペット|△|yasnippetなどで独自実装が必要|[joaotavora/yasnippet](https://github.com/joaotavora/yasnippet)|
-|自動フォーマット|◯|`M-x crystal-format`でバッファ上をフォーマットできる|[dotmilk/emacs-crystal-mode](https://github.com/dotmilk/emacs-crystal-mode)|
-|エラー検知|◯||[flycheck/flycheck](https://github.com/flycheck/flycheck)|
-|定義ジャンプ|△|TAGSファイルを生成する。[SuperPaintman/crystal-ctags](https://github.com/SuperPaintman/crystal-ctags)などがある||
+|項目|対応|備考|
+|---|:---:|---|
+|シンタックスハイライト|◯|[emacs-crystal-mode](https://github.com/dotmilk/emacs-crystal-mode)|
+|自動インデント|◯|[emacs-crystal-mode](https://github.com/dotmilk/emacs-crystal-mode)|
+|スニペット|△|独自定義が必要（[yasnippet](https://github.com/joaotavora/yasnippet)など）|
+|自動フォーマット|◯|`M-x crystal-format`（[emacs-crystal-mode](https://github.com/dotmilk/emacs-crystal-mode)）|
+|エラー検知|◯||[flycheck](https://github.com/flycheck/flycheck)|
+|定義ジャンプ|△|TAGS生成（[crystal-ctags](https://github.com/SuperPaintman/crystal-ctags)など）|
 |Spec実行|△|elispでシェル実行できるので、specを叩く||
 |Macro expand|△|elispでシェル実行できるので、expandを叩く||
 |デバッグ|◯|`M-x gdb`でemacs内からgdbを直接呼べる||
@@ -117,17 +117,17 @@ Emacsはデフォルトで`gdb`の呼び出しがサポートされていまし�
 GitHub製エディタです。周りでの使用者も増えてきたように思います。人気のエディタなので有志によってCrystalのライブラリも作成されています。しかし、まだ製作中のものであったり、機能が不十分だったりします。例えば、[ide-crystal](https://atom.io/packages/ide-crystal)は、将来実装される予定も含め、機能としては一番充実していますが、現在は修正中であり、実際にダウンロードしても十分に使えません（2017/10/03現在）。これらの現状も含め、今回は「現在のAtomでできるCrystal環境」について書いていきます。
 
 
-|項目|対応|備考|プラグイン|
-|---|:---:|---|---|
-|シンタックスハイライト|◯||[language-crystal-actual](https://atom.io/packages/language-crystal-actual)|
-|自動インデント|◯||[language-crystal-actual](https://atom.io/packages/language-crystal-actual)|
-|スニペット|◯||[language-crystal-actual](https://atom.io/packages/language-crystal-actual)|
-|自動フォーマット|✕|（[ide-crystal](https://atom.io/packages/ide-crystal)で実装予定）||
-|エラー検知|✕|（[ide-crystal](https://atom.io/packages/ide-crystal)で実装予定）||
-|定義ジャンプ|✕|（[ide-crystal](https://atom.io/packages/ide-crystal)で実装予定）||
-|Spec実行|✕|（[ide-crystal](https://atom.io/packages/ide-crystal)で実装予定）||
-|Macro expand|✕|||
-|デバッグ|◯||[dbg-gdb](https://atom.io/packages/dbg-gdb)など|
+|項目|対応|備考|
+|---|:---:|---|
+|シンタックスハイライト|◯|[language-crystal-actual](https://atom.io/packages/language-crystal-actual)|
+|自動インデント|◯|[language-crystal-actual](https://atom.io/packages/language-crystal-actual)|
+|スニペット|◯|[language-crystal-actual](https://atom.io/packages/language-crystal-actual)|
+|自動フォーマット|✕|（[ide-crystal](https://atom.io/packages/ide-crystal)で実装予定）|
+|エラー検知|✕|（[ide-crystal](https://atom.io/packages/ide-crystal)で実装予定）|
+|定義ジャンプ|✕|（[ide-crystal](https://atom.io/packages/ide-crystal)で実装予定）|
+|Spec実行|✕|（[ide-crystal](https://atom.io/packages/ide-crystal)で実装予定）|
+|Macro expand|✕||
+|デバッグ|◯|[dbg-gdb](https://atom.io/packages/dbg-gdb)など|
 
 ### `ide-crystal`に期待
 
@@ -142,17 +142,17 @@ GitHub製エディタです。周りでの使用者も増えてきたように�
 IDEの中では機能が充実している方だと思います。実際に自分はVSCodeを使用していますが、設定も簡単で機能も十分だと思います。検索すると複数のプラグインが出てきますが、現在最も開発が盛んなプラグインは[crystal-lang-tools/vscode-crystal-lang](https://github.com/crystal-lang-tools/vscode-crystal-lang)です。このパッケージもCrystal公式の[crystal-lang-tools](https://github.com/crystal-lang-tools)によって開発されています。当初は個人開発プロジェクトだったのですが昇格した形です。
 
 
-|項目|対応|備考|プラグイン|
-|---|:---:|---|---|
-|シンタックスハイライト|◯||[crystal-lang-tools/vscode-crystal-lang](https://github.com/crystal-lang-tools/vscode-crystal-lang)|
-|自動インデント|◯||[crystal-lang-tools/vscode-crystal-lang](https://github.com/crystal-lang-tools/vscode-crystal-lang)|
-|スニペット|◯||[crystal-lang-tools/vscode-crystal-lang](https://github.com/crystal-lang-tools/vscode-crystal-lang)|
-|自動フォーマット|◯|コマンド実行で可能|[crystal-lang-tools/vscode-crystal-lang](https://github.com/crystal-lang-tools/vscode-crystal-lang)|
-|エラー検知|◯||[crystal-lang-tools/vscode-crystal-lang](https://github.com/crystal-lang-tools/vscode-crystal-lang)|
-|定義ジャンプ|◯||[crystal-lang-tools/vscode-crystal-lang](https://github.com/crystal-lang-tools/vscode-crystal-lang)|
-|Spec実行|✕|||
-|Macro expand|✕|||
-|デバッグ|◯||[WebFreak001/code-debug](https://github.com/WebFreak001/code-debug)など|
+|項目|対応|備考|
+|---|:---:|---|
+|シンタックスハイライト|◯|[vscode-crystal-lang](https://github.com/crystal-lang-tools/vscode-crystal-lang)|
+|自動インデント|◯|[vscode-crystal-lang](https://github.com/crystal-lang-tools/vscode-crystal-lang)|
+|スニペット|◯|[vscode-crystal-lang](https://github.com/crystal-lang-tools/vscode-crystal-lang)|
+|自動フォーマット|◯|コマンド実行で可能（[vscode-crystal-lang](https://github.com/crystal-lang-tools/vscode-crystal-lang)）|
+|エラー検知|◯||[vscode-crystal-lang](https://github.com/crystal-lang-tools/vscode-crystal-lang)|
+|定義ジャンプ|◯||[vscode-crystal-lang](https://github.com/crystal-lang-tools/vscode-crystal-lang)|
+|Spec実行|✕||
+|Macro expand|✕||
+|デバッグ|◯|[code-debug](https://github.com/WebFreak001/code-debug)など|
 
 ### 簡単にinstallできて基本機能が充実している
 
