@@ -84,7 +84,7 @@ nnoremap ce :ProjectRootExe CrystalExpand<Return>
 
 [dbakker/vim-projectroot](https://github.com/dbakker/vim-projectroot)を使用していますので、そちらもインストールしてください。これでmacro上にカーソルを持っていき`ce`とタイプすると、macro展開後のコードを確認することができます。
 
-![](at-grandpa/img/crystal-expand.png)
+![](at-grandpa/img/crystal-expand.gray.png)
 画像１：crystal expand
 
 ## Emacs
@@ -166,7 +166,7 @@ IDEの中では機能が充実している方だと思います。実際に自�
 
 また、`gdb`が`Mac OX X Sierra`に完全に対応しているようではなく、`Sierra`でのgdbを使用したデバッグでは、変数の情報を取得できませんでした。`El Capitan`の場合はgdbで変数情報を取得できることは確認しました。`Sierra`でCrystalのデバッグを行うには、VirtualBoxでUbuntuを入れるなどの対応が必要そうです。
 
-![](at-grandpa/img/debug-ubuntu.png)
+![](at-grandpa/img/debug-ubuntu.gray.png)
 画像２：Ubuntuでのデバッグの様子
 
 ## さいごに
