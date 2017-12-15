@@ -1,7 +1,7 @@
 PANDOC  = pandoc
 PANDOC_OPT  =                  \
-	--latex-engine=lualatex      \
-	-V documentclass=bxjsbook \
+	--pdf-engine=lualatex        \
+	-V documentclass=bxjsbook    \
 	-V papersize=b5              \
 	-V fontsize=8pt              \
 	-V classoption=pandoc        \
